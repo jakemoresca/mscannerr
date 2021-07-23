@@ -9,6 +9,7 @@ import { AppMovieListComponent } from './app-movie/app-movie-list.component';
 import { AppMovieCardComponent } from './app-movie/app-movie-card/app-movie-card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppMovieTableRowComponent } from './app-movie/app-movie-table-row/app-movie-table-row.component';
+import { AppSettingsComponent } from './app-settings/app-settings.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AppMovieTableRowComponent } from './app-movie/app-movie-table-row/app-m
     AppNavMenuComponent,
     AppMovieListComponent,
     AppMovieCardComponent,
-    AppMovieTableRowComponent
+    AppMovieTableRowComponent,
+    AppSettingsComponent
   ],
   imports: [
     BrowserModule,
