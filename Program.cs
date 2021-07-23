@@ -18,6 +18,11 @@ namespace mscannerr
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration(config =>
+                {
+                    config.AddJsonFile("settings.json", optional: true, reloadOnChange: true)
+                        .AddJsonFile($"appsettings.json", true, true);
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

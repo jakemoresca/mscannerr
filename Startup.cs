@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using mscanner.Models;
 using mscannerr.Services;
 
 namespace mscannerr
@@ -24,6 +25,7 @@ namespace mscannerr
             services.AddHttpClient();
 
             services.AddScoped<IMovieService, MovieService>();
+            services.AddScoped<ISettingService, SettingService>();
 
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
