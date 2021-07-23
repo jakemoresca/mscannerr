@@ -22,7 +22,7 @@ namespace mscannerr.Services
 
         public async Task<MovieDto[]> GetMovies()
         {
-            const string API_KEY = "76dd5a28358641558224fd2c4155a696";
+            const string API_KEY = "";
             const int PORT = 11151;
             var baseUrl = $"http://server937.seedhost.eu:{PORT}/nathang0717/radarr/api/v3";
 
