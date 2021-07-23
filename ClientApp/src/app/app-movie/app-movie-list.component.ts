@@ -12,7 +12,7 @@ export class AppMovieListComponent implements OnInit {
 
     ngOnInit() { 
         this.movies = [{
-            title: "Kill Bill", description: "The Bride wakens from a four-year coma.", year: 2003
+            title: "Kill Bill", description: "The Bride wakens from a four-year coma.", year: 2003, status: "Unmonitored"
         }]
     }
 }

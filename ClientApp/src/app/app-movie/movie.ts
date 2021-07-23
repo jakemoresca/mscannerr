@@ -4,4 +4,5 @@ export interface IMovie
     description: string;
     year: number;
     posterUrl?: string;
+    status: string;
 }
