@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { IMovie } from './movie';
+import { MovieService } from './movie-service';
 
 @Component({
     selector: 'app-movie-list',
     templateUrl: 'app-movie-list.component.html'
 })
 
-export class AppMovieListComponent implements OnInit {
-    movies: IMovie[] = [];
-    constructor() { }
+export class AppMovieListComponent implements OnInit
+{
+    movies = this.movieService.getMovies();
+    constructor(private movieService: MovieService) { }
 
-    ngOnInit() { 
-        this.movies = [{
-            title: "Kill Bill", description: "The Bride wakens from a four-year coma.", year: 2003, status: "Unmonitored"
-        }]
-    }
+    ngOnInit(){ }
 }

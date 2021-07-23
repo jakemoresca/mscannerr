@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppMovieListComponent } from './app-movie/app-movie-list.component';
 import { AppMovieCardComponent } from './app-movie/app-movie-card/app-movie-card.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { AppMovieCardComponent } from './app-movie/app-movie-card/app-movie-card
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],
