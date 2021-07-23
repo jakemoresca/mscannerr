@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { AppMovieListComponent } from './app-movie/app-movie-list.component';
 import { AppMovieCardComponent } from './app-movie/app-movie-card/app-movie-card.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AppMovieTableRowComponent } from './app-movie/app-movie-table-row/app-movie-table-row.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppSidebarMenuComponent,
     AppNavMenuComponent,
     AppMovieListComponent,
-    AppMovieCardComponent
+    AppMovieCardComponent,
+    AppMovieTableRowComponent
   ],
   imports: [
     BrowserModule,

@@ -11,8 +11,10 @@
                     View
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Table</a></li>
-                    <li><a class="dropdown-item" href="#">Poster</a></li>
+                    <li><a class="dropdown-item" (click)="changeViewType('Table')"
+                        [ngClass]="getViewType() == 'Table' ? 'active' : ''">Table</a></li>
+                    <li><a class="dropdown-item" (click)="changeViewType('Poster')"
+                        [ngClass]="getViewType() == 'Poster' ? 'active' : ''">Poster</a></li>
                 </ul>
             </div>
         </div>
@@ -24,13 +26,13 @@
                     Filter
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">All</a></li>
-                    <li><a class="dropdown-item" href="#">Existing</a></li>
-                    <li><a class="dropdown-item" href="#">Not Existing</a></li>
+                    <li><a class="dropdown-item" [ngClass]="getFilterType() == 'All' ? 'active' : ''">All</a></li>
+                    <li><a class="dropdown-item" [ngClass]="getFilterType() == 'Existing' ? 'active' : ''">Existing</a></li>
+                    <li><a class="dropdown-item" [ngClass]="getFilterType() == 'NotExisting' ? 'active' : ''">Not Existing</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="#">Unmonitored</a></li>
+                    <li><a class="dropdown-item" [ngClass]="getFilterType() == 'Unmonitored' ? 'active' : ''">Unmonitored</a></li>
                 </ul>
             </div>
         </div>
@@ -41,10 +43,15 @@
 <div class="album py-5 bg-light">
     <div class="container">
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div *ngIf="getViewType() == 'Poster'" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <div class="col" *ngFor="let movie of movies | async">
-                <app-movie-card [movie]="movie"></app-movie-card>
+                <app-movie-card [movie]="movie" [baseUrl]="baseUrl"></app-movie-card>
             </div>
         </div>
+
+        <div *ngIf="getViewType() == 'Table'" class="row">
+            <app-movie-table-row [movies]="movies"></app-movie-table-row>
+        </div>
+
     </div>
 </div>

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using mscannerr.DTOs;
 using mscannerr.Models;
 using mscannerr.Services;
 
@@ -18,9 +19,9 @@ namespace mscannerr.Controllers
         }
 
         [HttpGet]
-        public List<Movie> Get()
+        public async Task<MovieDto[]> Get()
         {
-            return _movieService.GetMovies();
+            return await _movieService.GetMovies();
         }
     }
 }

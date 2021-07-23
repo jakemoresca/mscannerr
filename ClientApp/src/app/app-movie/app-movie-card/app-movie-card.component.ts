@@ -8,6 +8,7 @@ import { IMovie } from '../movie';
 
 export class AppMovieCardComponent implements OnInit {
     @Input() movie!: IMovie;
+    @Input() baseUrl!: string;
     constructor() { }
 
     ngOnInit() { }

@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using mscannerr.DTOs;
 using mscannerr.Models;
 
 namespace mscannerr.Services
 {
     public interface IMovieService
     {
-        List<Movie> GetMovies();
+        Task<MovieDto[]> GetMovies();
     }
 }
