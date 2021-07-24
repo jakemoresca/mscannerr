@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SettingService } from './setting-service';
+import { ISettings } from './settings';
 
 @Component({
     selector: 'app-settings',
@@ -6,7 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class AppSettingsComponent implements OnInit {
-    constructor() { }
+    settings: ISettings | undefined;
+    constructor(private settingService: SettingService) { }
 
-    ngOnInit() { }
+    ngOnInit() 
+    { 
+        this.settings = this.settingService.getSettings()
+    }
+
+    saveSettings()
+    {
+        if (this.settings)
+        {
+            this.settingService.saveSettings(this.settings)
+        }
+    }
 }

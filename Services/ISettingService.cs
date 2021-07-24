@@ -4,6 +4,6 @@ namespace mscannerr.Services
 {
     public interface ISettingService
     {
-        void Update(Settings model);
+        void Update(IntegrationSettings model);
     }
 }

@@ -20,8 +20,9 @@ namespace mscannerr
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration(config =>
                 {
-                    config.AddJsonFile("settings.json", optional: true, reloadOnChange: true)
-                        .AddJsonFile($"appsettings.json", true, true);
+                    config.AddJsonFile("integrationSettings.json", optional: true, reloadOnChange: true)
+                        .AddJsonFile($"appsettings.json", true, true)
+                        .Build();
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

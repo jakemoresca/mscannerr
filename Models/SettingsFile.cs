@@ -8,14 +8,24 @@ namespace mscanner.Models
     {
         private static object _lock = new object();
 
-        public const string FilePath = "settings.json";
+        public const string FilePath = "integrationSettings.json";
 
-        public static void Write(Settings settings)
+        public static void Write(IntegrationSettings settings)
         {
             lock (_lock)
             {
-                File.WriteAllText(FilePath, JsonSerializer.Serialize(settings));
+                var integrationSettingsFile = new IntegrationSettingsFile
+                {
+                    IntegrationSettings = settings
+                };
+
+                File.WriteAllText(FilePath, JsonSerializer.Serialize(integrationSettingsFile));
             }
         }
+    }
+
+    internal class IntegrationSettingsFile
+    {
+        public IntegrationSettings IntegrationSettings { get; set; }
     }
 }

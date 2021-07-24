@@ -10,23 +10,23 @@ namespace mscannerr.Controllers
     [ApiController]
     public class SettingController : ControllerBase
     {
-        private readonly Settings _settings;
+        private readonly IOptionsSnapshot<IntegrationSettings> _settingOptions;
         private readonly ISettingService _settingService;
 
-        public SettingController(IOptionsSnapshot<Settings> settingsOptions, ISettingService settingService)
+        public SettingController(IOptionsSnapshot<IntegrationSettings> settingsOptions, ISettingService settingService)
         {
-            _settings = settingsOptions.Value;
+            _settingOptions = settingsOptions;
             _settingService = settingService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public IntegrationSettings Get()
         {
-            return Ok(_settings);
+            return _settingOptions.Value;
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] Settings model)
+        public async Task<IActionResult> PostAsync([FromBody] IntegrationSettings model)
         {
             model.BaseUrl = model.BaseUrl.Trim();
 

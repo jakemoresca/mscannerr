@@ -27,6 +27,9 @@ namespace mscannerr
             services.AddScoped<IMovieService, MovieService>();
             services.AddScoped<ISettingService, SettingService>();
 
+            var integrationSettings = Configuration.GetSection("IntegrationSettings");
+            services.Configure<IntegrationSettings>(integrationSettings);
+
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

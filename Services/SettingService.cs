@@ -4,7 +4,7 @@ namespace mscannerr.Services
 {
     public class SettingService : ISettingService
     {
-        public void Update(Settings model)
+        public void Update(IntegrationSettings model)
         {
             SettingsFile.Write(model);
         }

@@ -1,10 +1,10 @@
 namespace mscanner.Models
 {
-    public class Settings
+    public class IntegrationSettings
     {
-        public Settings() {}
+        public IntegrationSettings() {}
 
-        public Settings(string baseUrl, string apiKey, string host, int port, bool useSsl)
+        public IntegrationSettings(string baseUrl, string apiKey, string host, int port, bool useSsl)
         {
             BaseUrl = baseUrl;
             ApiKey = apiKey;
