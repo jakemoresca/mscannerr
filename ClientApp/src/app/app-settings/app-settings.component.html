@@ -2,6 +2,7 @@
     <div class="container-fluid justify-content-start">
         <div class="col-md-9">
             <button type="button" class="btn btn-outline-primary" (click)="saveSettings()">Save</button>
+            <button type="button" class="btn btn-outline-primary" (click)="testSettings()">Test Settings</button>
         </div>
     </div>
 </nav>
@@ -9,6 +10,27 @@
 <div class="album py-5 bg-light" *ngIf="settings">
     <div class="container">
         <h2>Settings</h2>
+
+        <div class="alert alert-success d-flex align-items-center" role="alert" *ngIf="saveSuccess">
+            <i class="bi bi-check2"></i>
+            <div>
+                Settings was saved succesfully
+            </div>
+        </div>
+
+        <div class="alert alert-success d-flex align-items-center" role="alert" *ngIf="testSuccess">
+            <i class="bi bi-check2"></i>
+            <div>
+                Connection to Radarr has been established
+            </div>
+        </div>
+
+        <div class="alert alert-danger d-flex align-items-center" role="alert" *ngIf="testSuccess === false">
+            <i class="bi bi-exclamation-diamond-fill"></i>
+            <div>
+                Cannot connect to Radarr using the settings provided
+            </div>
+        </div>
 
         <div class="form-floating mb-3">
             <input type="text" class="form-control" id="baseUrl" [(ngModel)]="settings.baseUrl">

@@ -9,6 +9,8 @@ import { ISettings } from './settings';
 
 export class AppSettingsComponent implements OnInit {
     settings: ISettings | undefined;
+    saveSuccess: boolean = false;
+    testSuccess?: boolean = undefined;
     constructor(private settingService: SettingService) { }
 
     ngOnInit() 
@@ -24,10 +26,17 @@ export class AppSettingsComponent implements OnInit {
     {
         if (this.settings)
         {
-            let lastResult = false;
-
             this.settingService.saveSettings(this.settings).toPromise()
-                .then(result => lastResult = result.ok);
+                .then(result => this.saveSuccess = result.ok);
+        }
+    }
+
+    testSettings()
+    {
+        if (this.settings)
+        {
+            this.settingService.testSettings(this.settings).toPromise()
+                .then(result => this.testSuccess = result.ok);
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using mscanner.Models;
 using mscannerr.DTOs;
 using mscannerr.Models;
 using mscannerr.Services;

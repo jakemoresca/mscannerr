@@ -12,11 +12,14 @@ namespace mscannerr.Controllers
     {
         private readonly IOptionsSnapshot<IntegrationSettings> _settingOptions;
         private readonly ISettingService _settingService;
+        private readonly IMovieService _movieService;
 
-        public SettingController(IOptionsSnapshot<IntegrationSettings> settingsOptions, ISettingService settingService)
+        public SettingController(IOptionsSnapshot<IntegrationSettings> settingsOptions, 
+            ISettingService settingService, IMovieService movieService)
         {
             _settingOptions = settingsOptions;
             _settingService = settingService;
+            _movieService = movieService;
         }
 
         [HttpGet]
@@ -38,6 +41,14 @@ namespace mscannerr.Controllers
             _settingService.Update(model);
 
             return Ok(new { ok = true });
+        }
+
+        [HttpPost("Test")]
+        public async Task<IActionResult> TestAsync([FromBody] IntegrationSettings model)
+        {
+            var result = await _movieService.TestSettings(model);
+
+            return Ok(new { ok = result });
         }
     }
 }

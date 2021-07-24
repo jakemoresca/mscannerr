@@ -17,4 +17,9 @@ export class SettingService
     {
         return this.httpClient.post<{ ok: boolean }>("/api/Setting", settings)
     }
+
+    testSettings(settings: ISettings)
+    {
+        return this.httpClient.post<{ ok: boolean }>("/api/Setting/Test", settings)
+    }
 }
