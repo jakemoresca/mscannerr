@@ -10,30 +10,11 @@ export class SettingService
 
     getSettings()
     {
-        let settings: ISettings = {
-            "baseUrl": "",
-            "apiKey": "",
-            "host": "",
-            "port": 80,
-            "useSsl": false
-        };
-
-        this.httpClient.get<ISettings>("/api/Setting").toPromise()
-            .then(result => 
-                {
-                    return result;
-                });
-
-        return settings;
+        return this.httpClient.get<ISettings>("/api/Setting");
     }
 
     saveSettings(settings: ISettings)
     {
-        let lastResult = false;
-
-        const subscription = this.httpClient.post<{ ok: boolean }>("/api/Setting", settings).toPromise()
-            .then(result => lastResult = result.ok);
-
-        return lastResult;
+        return this.httpClient.post<{ ok: boolean }>("/api/Setting", settings)
     }
 }

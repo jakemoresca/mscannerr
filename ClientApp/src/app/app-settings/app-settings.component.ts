@@ -13,14 +13,21 @@ export class AppSettingsComponent implements OnInit {
 
     ngOnInit() 
     { 
-        this.settings = this.settingService.getSettings()
+        this.settingService.getSettings().toPromise()
+            .then(result => 
+            {
+                this.settings = result;
+            });
     }
 
     saveSettings()
     {
         if (this.settings)
         {
-            this.settingService.saveSettings(this.settings)
+            let lastResult = false;
+
+            this.settingService.saveSettings(this.settings).toPromise()
+                .then(result => lastResult = result.ok);
         }
     }
 }
