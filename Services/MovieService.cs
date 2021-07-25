@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -15,13 +16,22 @@ namespace mscannerr.Services
     {
         private readonly ILogger _logger;
         private readonly HttpClient _httpClient;
+        private readonly ILoggerFactory _loggerFactory;
         private readonly IOptionsSnapshot<IntegrationSettings> _settingsOptions;
+        private readonly IOptionsSnapshot<MovieDB> _movieDbOptions;
+        private readonly INetflixScraperService _netflixScraperService;
 
-        public MovieService(ILoggerFactory loggerFactory, IHttpClientFactory clientFactory, IOptionsSnapshot<IntegrationSettings> settingsOptions)
+        public MovieService(ILoggerFactory loggerFactory, IHttpClientFactory clientFactory, 
+            IOptionsSnapshot<IntegrationSettings> settingsOptions,
+            IOptionsSnapshot<MovieDB> movieDbOptions,
+            INetflixScraperService netflixScraperService)
         {
             _logger = loggerFactory.CreateLogger<MovieService>();
             _httpClient = clientFactory.CreateClient();
+            _loggerFactory = loggerFactory;
             _settingsOptions = settingsOptions;
+            _movieDbOptions = movieDbOptions;
+            _netflixScraperService = netflixScraperService;
         }
 
         public async Task<MovieDto[]> GetMovies()
@@ -44,6 +54,25 @@ namespace mscannerr.Services
             {
                 return new MovieDto[] { };
             }
+        }
+
+        public async Task<ScannedMovie> MatchMovie(MovieDto movie)
+        {
+            var scannedMovie = await _netflixScraperService.SearchMovieAsync(movie);
+
+            if(!scannedMovie.Exist)
+                return scannedMovie;
+
+            var movieDB = _movieDbOptions.Value;
+            var isAlreadyOnDb = movieDB.Collection.Any(x => x.Title == movie.Title);
+
+            if(isAlreadyOnDb)
+                movieDB.Collection.RemoveAll(x => x.Title == movie.Title);
+
+            movieDB.Collection.Add(scannedMovie);
+            MovieDBFile.Write(movieDB);
+
+            return scannedMovie;
         }
 
         public async Task<bool> TestSettings(IntegrationSettings settings)

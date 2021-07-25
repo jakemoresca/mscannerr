@@ -26,9 +26,14 @@ namespace mscannerr
 
             services.AddScoped<IMovieService, MovieService>();
             services.AddScoped<ISettingService, SettingService>();
+            services.AddScoped<IMovieDBService, MovieDBService>();
+            services.AddScoped<INetflixScraperService, NetflixScraperService>();
 
             var integrationSettings = Configuration.GetSection("IntegrationSettings");
             services.Configure<IntegrationSettings>(integrationSettings);
+
+            var movieDB = Configuration.GetSection("MovieDB");
+            services.Configure<MovieDB>(integrationSettings);
 
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory

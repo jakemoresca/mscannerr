@@ -24,5 +24,11 @@ namespace mscannerr.Controllers
         {
             return await _movieService.GetMovies();
         }
+
+        [HttpPost("MatchMovie")]
+        public async Task<ScannedMovie> MatchMovie([FromBody] MovieDto movie)
+        {
+            return await _movieService.MatchMovie(movie);
+        }
     }
 }

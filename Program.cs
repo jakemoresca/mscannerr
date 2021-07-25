@@ -21,6 +21,7 @@ namespace mscannerr
                 .ConfigureAppConfiguration(config =>
                 {
                     config.AddJsonFile("integrationSettings.json", optional: true, reloadOnChange: true)
+                        .AddJsonFile("movieDB.json", optional: true, reloadOnChange: true)
                         .AddJsonFile($"appsettings.json", true, true)
                         .Build();
                 })
