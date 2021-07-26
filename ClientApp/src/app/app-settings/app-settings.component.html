@@ -17,13 +17,26 @@
                 Settings was saved succesfully
             </div>
         </div>
-
+        
         <div class="alert alert-success d-flex align-items-center" role="alert" *ngIf="testSuccess">
             <i class="bi bi-check2"></i>
             <div>
                 Connection to Radarr has been established
             </div>
         </div>
+
+        <hr>
+        
+        <h5>General Settings</h5>
+        
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="countryFilter" [(ngModel)]="settings.countryFilter">
+            <label for="countryFilter">Country Filter</label>
+        </div>
+
+        <hr>
+
+        <h5>Radarr Integration</h5>
 
         <div class="alert alert-danger d-flex align-items-center" role="alert" *ngIf="testSuccess === false">
             <i class="bi bi-exclamation-diamond-fill"></i>
@@ -54,5 +67,6 @@
                 Use SSL
             </label>
         </div>
+
     </div>
 </div>

@@ -1,29 +1,32 @@
-<div class="card shadow-sm text-white bg-dark mb-3">
-    <ng-container *ngIf="movie.images.length == 0">
-        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
-            role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <title>{{ movie.title }}</title>
-            <rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">{{
-                movie.title
-                }}</text>
-        </svg>
+<div [ngClass]="isHidden ? 'd-none' : 'col'">
+    <div class="card shadow-sm text-white bg-dark mb-3">
+        <ng-container *ngIf="movie.images.length == 0">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>{{ movie.title }}</title>
+                <rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">{{
+                    movie.title
+                    }}</text>
+            </svg>
 
-    </ng-container>
-    <ng-container *ngIf="movie.images.length > 0">
-        <ng-container *ngFor="let movieImage of [movie.images[0]]">
-            <img [src]="baseUrl + movieImage.url" class="card-img-top align-self-center" alt="movie.title" style="width: 250px; height: auto">
         </ng-container>
-    </ng-container>
+        <ng-container *ngIf="movie.images.length > 0">
+            <ng-container *ngFor="let movieImage of [movie.images[0]]">
+                <img [src]="baseUrl + movieImage.url" class="card-img-top align-self-center" alt="movie.title"
+                    style="width: 250px; height: auto">
+            </ng-container>
+        </ng-container>
 
-    <div class="card-body">
-        <p class="card-text">{{ movie.title }} - {{ movie.overview }}</p>
-        <p class="card-text">Streaming Site Status: {{ matchedMovie?.exist ? 'Exists' : 'Not Found' }}</p>
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="btn-group">
-                <button type="button" class="btn btn-outline-primary">View</button>
-                <button type="button" class="btn btn-outline-primary" (click)="scanMovie.emit(movie)">Scan</button>
-                <button type="button" class="btn btn-outline-primary">Mark Delete</button>
-                <button type="button" class="btn btn-outline-primary">Unmonitor</button>
+        <div class="card-body">
+            <p class="card-text">{{ movie.title }} - {{ movie.overview }}</p>
+            <p class="card-text">Streaming Site Status: {{ matchedMovie?.exist ? 'Exists' : 'Not Found' }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline-primary">View</button>
+                    <button type="button" class="btn btn-outline-primary" (click)="scanMovie.emit(movie)">Scan</button>
+                    <button type="button" class="btn btn-outline-primary">Mark Delete</button>
+                    <button type="button" class="btn btn-outline-primary">Unmonitor</button>
+                </div>
             </div>
         </div>
     </div>

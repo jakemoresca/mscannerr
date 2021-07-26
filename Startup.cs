@@ -33,7 +33,7 @@ namespace mscannerr
             services.Configure<IntegrationSettings>(integrationSettings);
 
             var movieDB = Configuration.GetSection("MovieDB");
-            services.Configure<MovieDB>(integrationSettings);
+            services.Configure<MovieDB>(movieDB);
 
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory

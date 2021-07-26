@@ -12,9 +12,9 @@
                 </button>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" (click)="changeViewType('Table')"
-                        [ngClass]="getViewType() == 'Table' ? 'active' : ''">Table</a></li>
+                        [ngClass]="viewType == 'Table' ? 'active' : ''">Table</a></li>
                     <li><a class="dropdown-item" (click)="changeViewType('Poster')"
-                        [ngClass]="getViewType() == 'Poster' ? 'active' : ''">Poster</a></li>
+                        [ngClass]="viewType == 'Poster' ? 'active' : ''">Poster</a></li>
                 </ul>
             </div>
         </div>
@@ -26,13 +26,17 @@
                     Filter
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" [ngClass]="getFilterType() == 'All' ? 'active' : ''">All</a></li>
-                    <li><a class="dropdown-item" [ngClass]="getFilterType() == 'Existing' ? 'active' : ''">Existing</a></li>
-                    <li><a class="dropdown-item" [ngClass]="getFilterType() == 'NotExisting' ? 'active' : ''">Not Existing</a></li>
+                    <li><a class="dropdown-item" (click)="changeFilterType('All')" 
+                        [ngClass]="filterType == 'All' ? 'active' : ''">All</a></li>
+                    <li><a class="dropdown-item" (click)="changeFilterType('Existing')"
+                        [ngClass]="filterType == 'Existing' ? 'active' : ''">Existing</a></li>
+                    <li><a class="dropdown-item" (click)="changeFilterType('NotExisting')"
+                        [ngClass]="filterType == 'NotExisting' ? 'active' : ''">Not Existing</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" [ngClass]="getFilterType() == 'Unmonitored' ? 'active' : ''">Unmonitored</a></li>
+                    <li><a class="dropdown-item" (click)="changeFilterType('Unmonitored')"
+                        [ngClass]="filterType == 'Unmonitored' ? 'active' : ''">Unmonitored</a></li>
                 </ul>
             </div>
         </div>
@@ -43,13 +47,15 @@
 <div class="album py-5 bg-light">
     <div class="container">
 
-        <div *ngIf="getViewType() == 'Poster'" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <div class="col" *ngFor="let movie of movies | async;">
-                <app-movie-card [movie]="movie" [baseUrl]="baseUrl" (scanMovie)="scanMovie(movie)" [matchedMovies]="matchedMovies"></app-movie-card>
-            </div>
+        <div *ngIf="viewType == 'Poster'" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <ng-container *ngFor="let movie of movies | async;">
+                <app-movie-card [movie]="movie" [baseUrl]="baseUrl" 
+                    [countryFilter]="countryFilter" [filterType]="filterType"
+                    (scanMovie)="scanMovie(movie)" [matchedMovies]="matchedMovies"></app-movie-card>
+            </ng-container>
         </div>
 
-        <div *ngIf="getViewType() == 'Table'" class="row">
+        <div *ngIf="viewType == 'Table'" class="row">
             <app-movie-table-row [movies]="movies"></app-movie-table-row>
         </div>
 

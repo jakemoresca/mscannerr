@@ -12,6 +12,10 @@ export class MovieService {
         return this.httpClient.get<IMovie[]>("/api/Movie");
     }
 
+    getMatchedMovies() {
+        return this.httpClient.get<IScannedMovie[]>("/api/Movie/MatchedMovies");
+    }
+
     matchMovie(movie: IMovie) {
         return this.httpClient.post<IScannedMovie>("/api/Movie/Match", movie);
     }

@@ -5,4 +5,6 @@ export interface ISettings
     host: string;
     port: number
     useSsl: boolean
+
+    countryFilter: string;
 }

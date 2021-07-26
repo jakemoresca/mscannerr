@@ -100,29 +100,30 @@
     <hr>
     <div class="position-sticky pt-3">
         <ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item">
-                <a routerLink="/movies" class="nav-link active" aria-current="page">
-                    <svg class="bi me-2" width="16" height="16">
-                        <use xlink:href="#home"></use>
-                    </svg>
-                    Movies
-                </a>
+            <li class="mb-1 text-white">
+                <button class="btn btn-dark btn-toggle align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#home-collapse"
+                    aria-expanded="true">
+                    Home
+                </button>
+                <div class="collapse show" id="home-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li><a routerLink="/movies" class="link-light rounded">Movies</a></li>
+                        <li><a href="#" class="link-light rounded">Series</a></li>
+                    </ul>
+                </div>
             </li>
-            <li>
-                <a href="#" class="nav-link text-white">
-                    <svg class="bi me-2" width="16" height="16">
-                        <use xlink:href="#speedometer2"></use>
-                    </svg>
-                    Series
-                </a>
-            </li>
-            <li>
-                <a routerLink="/settings" class="nav-link text-white">
-                    <svg class="bi me-2" width="16" height="16">
-                        <use xlink:href="#table"></use>
-                    </svg>
+           
+            <li class="mb-1 text-white">
+                <button class="btn btn-dark btn-toggle align-items-center rounded" data-bs-toggle="collapse"
+                    data-bs-target="#settings-collapse" aria-expanded="true">
                     Settings
-                </a>
+                </button>
+                <div class="collapse show" id="settings-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li><a routerLink="/settings" class="link-light rounded">Movies</a></li>
+                        <li><a href="#" class="link-light rounded">Series</a></li>
+                    </ul>
+                </div>
             </li>
         </ul>
 

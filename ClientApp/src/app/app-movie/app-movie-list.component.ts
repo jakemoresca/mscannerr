@@ -13,6 +13,9 @@ export class AppMovieListComponent implements OnInit
     movies = this.movieService.getMovies();
     matchedMovies: IScannedMovie[] = [];
     baseUrl!: string;
+    countryFilter: string[] = [];
+    filterType!: string;
+    viewType!: string;
     
     constructor(private movieService: MovieService, private settingService: SettingService) { }
 
@@ -22,25 +25,38 @@ export class AppMovieListComponent implements OnInit
             {
                 const protocol = result.useSsl ? "https://" : "http://"
                 this.baseUrl = `${protocol}${result.host}:${result.port}`;
+
+                this.countryFilter = result.countryFilter.split(",");
             });
+
+        this.movieService.getMatchedMovies().toPromise()
+            .then(result =>
+                {
+                    this.matchedMovies = result;
+                })
+
+        this.getViewType();
+        this.getFilterType();
     }
 
     getViewType() {
-        return this.movieService.getViewType();
+        this.viewType = this.movieService.getViewType();
     }
 
     getFilterType() {
-        return this.movieService.getFilterType();
+        this.filterType = this.movieService.getFilterType();
     }
 
     changeFilterType(filterType: string)
     {
         this.movieService.changeFilterType(filterType);
+        this.getFilterType();
     }
 
     changeViewType(viewType: string)
     {
         this.movieService.changeViewType(viewType);
+        this.getViewType();
     }
 
     scanMovie(movie: IMovie) {
