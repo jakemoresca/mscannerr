@@ -23,3 +23,10 @@ export interface IMovieImage
     coverType: string;
     url: string;
 }
+
+export interface IScannedMovie
+{
+    title: string;
+    countries: string[];
+    exist: boolean;
+}

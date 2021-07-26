@@ -64,6 +64,12 @@ namespace mscannerr.Services
                 return scannedMovie;
 
             var movieDB = _movieDbOptions.Value;
+
+            if(movieDB.Collection == null)
+            {
+                movieDB.Collection = new List<ScannedMovie>();
+            }
+
             var isAlreadyOnDb = movieDB.Collection.Any(x => x.Title == movie.Title);
 
             if(isAlreadyOnDb)
@@ -73,6 +79,20 @@ namespace mscannerr.Services
             MovieDBFile.Write(movieDB);
 
             return scannedMovie;
+        }
+
+        public async Task<List<ScannedMovie>> MatchMovies()
+        {
+            var movies = await GetMovies();
+            var scannedMovies = await _netflixScraperService.BatchSearchMoviesAsync(movies);
+
+            var movieDB = _movieDbOptions.Value;
+            movieDB.Collection = scannedMovies;
+
+            MovieDBFile.Write(movieDB);
+            MovieDBFile.Write(movieDB);
+
+            return scannedMovies;
         }
 
         public async Task<bool> TestSettings(IntegrationSettings settings)

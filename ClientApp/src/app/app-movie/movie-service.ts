@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IMovie } from './movie';
+import { IMovie, IScannedMovie } from './movie';
 
 @Injectable({providedIn: 'root'})
 export class MovieService {
@@ -10,6 +10,14 @@ export class MovieService {
     
     getMovies() {
         return this.httpClient.get<IMovie[]>("/api/Movie");
+    }
+
+    matchMovie(movie: IMovie) {
+        return this.httpClient.post<IScannedMovie>("/api/Movie/Match", movie);
+    }
+
+    matchMovies() {
+        return this.httpClient.post<IScannedMovie[]>("/api/Movie/MatchAll", {});
     }
 
     getViewType() {

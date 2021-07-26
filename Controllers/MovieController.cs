@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using mscanner.Models;
 using mscannerr.DTOs;
-using mscannerr.Models;
 using mscannerr.Services;
 
 namespace mscannerr.Controllers
@@ -25,10 +24,16 @@ namespace mscannerr.Controllers
             return await _movieService.GetMovies();
         }
 
-        [HttpPost("MatchMovie")]
+        [HttpPost("Match")]
         public async Task<ScannedMovie> MatchMovie([FromBody] MovieDto movie)
         {
             return await _movieService.MatchMovie(movie);
+        }
+
+        [HttpPost("MatchAll")]
+        public async Task<List<ScannedMovie>> MatchMovies()
+        {
+            return await _movieService.MatchMovies();
         }
     }
 }

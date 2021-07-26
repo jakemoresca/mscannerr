@@ -17,11 +17,11 @@
 
     <div class="card-body">
         <p class="card-text">{{ movie.title }} - {{ movie.overview }}</p>
-        <p class="card-text">Status: {{ movie.status }}</p>
+        <p class="card-text">Streaming Site Status: {{ matchedMovie?.exist ? 'Exists' : 'Not Found' }}</p>
         <div class="d-flex justify-content-between align-items-center">
             <div class="btn-group">
                 <button type="button" class="btn btn-outline-primary">View</button>
-                <button type="button" class="btn btn-outline-primary">Scan</button>
+                <button type="button" class="btn btn-outline-primary" (click)="scanMovie.emit(movie)">Scan</button>
                 <button type="button" class="btn btn-outline-primary">Mark Delete</button>
                 <button type="button" class="btn btn-outline-primary">Unmonitor</button>
             </div>
