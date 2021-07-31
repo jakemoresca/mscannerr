@@ -56,7 +56,8 @@
         </div>
 
         <div *ngIf="viewType == 'Table'" class="row">
-            <app-movie-table-row [movies]="movies"></app-movie-table-row>
+            <app-movie-table [movies]="movies" [countryFilter]="countryFilter" [filterType]="filterType"
+                    (scanMovie)="scanMovie($event)" [matchedMovies]="matchedMovies"></app-movie-table>
         </div>
 
     </div>
