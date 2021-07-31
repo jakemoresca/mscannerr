@@ -56,6 +56,28 @@ namespace mscannerr.Services
             }
         }
 
+        public async Task<MovieDto> GetMovie(int movieId)
+        {
+            var getMovieUrl = new Uri(GetServiceUrl(_settingsOptions.Value, $"/movie/{movieId}"));
+            var request = new HttpRequestMessage(HttpMethod.Get, getMovieUrl);
+
+            var response = await _httpClient.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var moviesJson = await response.Content.ReadAsStringAsync();
+
+                var options = new JsonSerializerOptions();
+                options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+
+                return JsonSerializer.Deserialize<MovieDto>(moviesJson, options);
+            }
+            else
+            {
+                return new MovieDto { };
+            }
+        }
+
         public async Task<ScannedMovie> MatchMovie(MovieDto movie)
         {
             var scannedMovie = await _netflixScraperService.SearchMovieAsync(movie);

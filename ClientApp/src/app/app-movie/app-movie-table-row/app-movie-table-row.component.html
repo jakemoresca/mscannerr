@@ -5,7 +5,7 @@
     <td class="col">{{existStatus}}</td>
     <td class="col">
         <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-outline-primary">View</button>
+            <a class="btn btn-outline-primary" [routerLink]="['/movies/', movie.id]" role="button">View</a>
             <button type="button" class="btn btn-sm btn-outline-primary" (click)="scanMovie.emit(movie)">Scan</button>
             <button type="button" class="btn btn-sm btn-outline-primary">Mark Delete</button>
             <button type="button" class="btn btn-sm btn-outline-primary">Unmonitor</button>

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, HostBinding, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { IMovie, IScannedMovie } from '../movie';
+import { movieAdditionalDetails } from '../movie-helper';
 
 @Component({
     styleUrls: ["app-movie-card.component.scss"],
@@ -41,19 +42,16 @@ export class AppMovieCardComponent implements OnInit, OnChanges {
         }
 
         const filterType = changes.hasOwnProperty("filterType") ? changes["filterType"].currentValue as string : this.filterType;
-        const countryFilter = changes.hasOwnProperty("countryFilter") ? changes["countryFilter"].currentValue as string : this.countryFilter;
+        const countryFilter = changes.hasOwnProperty("countryFilter") ? changes["countryFilter"].currentValue as string[] : this.countryFilter;
 
         if (changes.hasOwnProperty("filterType") || changes.hasOwnProperty("countryFilter"))
         {
-            const intersection = this.matchedMovie?.countries?.filter(country => countryFilter.includes(country)) || [];
-            
-            this.notExist = (intersection.length == 0 || this.matchedMovie == null || this.matchedMovie.exist == false);
-            this.foundOnOtherCountry = this.matchedMovie?.exist && intersection.length == 0;
-            this.existStatus = !this.notExist && !this.foundOnOtherCountry ? "Exist" : this.foundOnOtherCountry ? "Found on other Country" : "Not Found";
+            const { notExist, foundOnOtherCountry, existStatus, isHidden } = movieAdditionalDetails(this.matchedMovie, countryFilter, filterType);
 
-            this.isHidden = (filterType == 'Existing' && this.notExist) || 
-                (filterType == "ExistOnOtherCountry" && !this.foundOnOtherCountry) ||
-                (filterType == "NotExisting" && (!this.notExist || this.foundOnOtherCountry))
+            this.notExist = notExist;
+            this.foundOnOtherCountry = foundOnOtherCountry;
+            this.existStatus = existStatus;
+            this.isHidden = isHidden;
 
             this.cssClass = this.isHidden ? "d-none" : "";
         }

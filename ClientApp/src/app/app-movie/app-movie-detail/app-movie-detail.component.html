@@ -1,0 +1,49 @@
+<nav class="navbar navbar-dark bg-dark ml-n1">
+    <div class="container-fluid justify-content-start">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/movies">Movies</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{movie.title}}</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="container-fluid justify-content-start">
+        <div class="col-md-9">
+            <button type="button" class="btn btn-outline-primary">View on Radarr</button>
+            <button type="button" class="btn btn-outline-primary">Scan</button>
+            <button type="button" class="btn btn-outline-primary">Mark Delete</button>
+            <button type="button" class="btn btn-outline-primary">UnMonitor</button>
+        </div>
+    </div>
+</nav>
+
+<div class="album py-5 bg-light" *ngIf="movie">
+    <div class="container">
+        <div class="card shadow-sm text-white bg-dark mb-3">
+            <ng-container *ngIf="movie.images.length == 0">
+                <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+                    xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
+                    preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <title>{{ movie.title }}</title>
+                    <rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef"
+                        dy=".3em">{{
+                        movie.title
+                        }}</text>
+                </svg>
+
+            </ng-container>
+            <ng-container *ngIf="movie.images.length > 0 && baseUrl">
+                <ng-container *ngFor="let movieImage of [movie.images[0]]">
+                    <img [src]="baseUrl + movieImage.url" class="card-img-top align-self-center" alt="movie.title"
+                        style="width: 250px; height: auto">
+                </ng-container>
+            </ng-container>
+
+            <div class="card-body">
+                <p class="card-text">{{ movie.title }} - {{ movie.overview }}</p>
+                <p class="card-text">Released Status: {{ movie.status}}</p>
+                <p class="card-text">Streaming Site Status: {{ existStatus }}</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -9,6 +9,7 @@ namespace mscannerr.Services
     public interface IMovieService
     {
         Task<MovieDto[]> GetMovies();
+        Task<MovieDto> GetMovie(int movieId);
         Task<bool> TestSettings(IntegrationSettings settings);
         Task<ScannedMovie> MatchMovie(MovieDto movie);
         Task<List<ScannedMovie>> MatchMovies();

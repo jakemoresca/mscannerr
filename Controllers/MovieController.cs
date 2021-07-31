@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -27,10 +28,25 @@ namespace mscannerr.Controllers
             return await _movieService.GetMovies();
         }
 
+        [HttpGet("{movieId}")]
+        public async Task<MovieDto> Get(int movieId)
+        {
+            return await _movieService.GetMovie(movieId);
+        }
+
         [HttpGet("MatchedMovies")]
         public List<ScannedMovie> GetMatchMovies()
         {
             return _movieDbOptions.Value.Collection;
+        }
+
+        [HttpGet("MatchedMovies/{movieTitle}")]
+        public ScannedMovie GetMatchMovies(string movieTitle)
+        {
+            return _movieDbOptions.Value.Collection.FirstOrDefault(movie =>
+            {
+                return movie.Title == movieTitle;
+            });
         }
 
         [HttpPost("Match")]

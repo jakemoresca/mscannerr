@@ -11,6 +11,7 @@ import { AppMovieTableComponent } from './app-movie/app-movie-table-row/app-movi
 import { AppSettingsComponent } from './app-settings/app-settings.component';
 import { FormsModule } from '@angular/forms';
 import { AppMovieTableRowComponent } from './app-movie/app-movie-table-row/app-movie-table-row.component';
+import { AppMovieDetailComponent } from './app-movie/app-movie-detail/app-movie-detail.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AppMovieTableRowComponent } from './app-movie/app-movie-table-row/app-m
     AppMovieCardComponent,
     AppMovieTableRowComponent,
     AppMovieTableComponent,
-    AppSettingsComponent
+    AppSettingsComponent,
+    AppMovieDetailComponent
   ],
   imports: [
     BrowserModule,

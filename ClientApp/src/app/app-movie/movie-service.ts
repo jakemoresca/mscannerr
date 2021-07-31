@@ -12,8 +12,16 @@ export class MovieService {
         return this.httpClient.get<IMovie[]>("/api/Movie");
     }
 
+    async getMovie(movieId: number) {
+        return await this.httpClient.get<IMovie>(`/api/Movie/${movieId}`).toPromise();
+    }
+
     getMatchedMovies() {
         return this.httpClient.get<IScannedMovie[]>("/api/Movie/MatchedMovies");
+    }
+
+    async getMatchedMovie(movieTitle: string) {
+        return await this.httpClient.get<IScannedMovie>(`/api/Movie/MatchedMovies/${movieTitle}`).toPromise();
     }
 
     matchMovie(movie: IMovie) {
