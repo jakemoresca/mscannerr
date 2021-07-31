@@ -15,7 +15,10 @@ export class AppMovieTableRowComponent implements OnInit, OnChanges {
     @Output() scanMovie = new EventEmitter<IMovie>();
 
     matchedMovie!: IScannedMovie | undefined;
-    isHidden: boolean | undefined = false;
+    isHidden!: boolean | undefined;
+    notExist!: boolean | undefined;
+    foundOnOtherCountry!: boolean | undefined;
+    existStatus!: string;
 
     @HostBinding('attr.class') cssClass: string = "";
     constructor() { }
@@ -42,7 +45,13 @@ export class AppMovieTableRowComponent implements OnInit, OnChanges {
         {
             const intersection = this.matchedMovie?.countries?.filter(country => countryFilter.includes(country)) || [];
 
-            this.isHidden = filterType == 'Existing' && (intersection.length > 0 || this.matchedMovie == null || this.matchedMovie.exist == false);
+            this.notExist = (intersection.length == 0 || this.matchedMovie == null || this.matchedMovie.exist == false);
+            this.foundOnOtherCountry = this.matchedMovie?.exist && intersection.length == 0;
+            this.existStatus = !this.notExist && !this.foundOnOtherCountry ? "Exist" : this.foundOnOtherCountry ? "Found on other Country" : "Not Found";
+
+            this.isHidden = (filterType == 'Existing' && this.notExist) ||
+                (filterType == "ExistOnOtherCountry" && !this.foundOnOtherCountry) ||
+                (filterType == "NotExisting" && (!this.notExist || this.foundOnOtherCountry))
 
             this.cssClass = this.isHidden ? "d-none" : "";
         }

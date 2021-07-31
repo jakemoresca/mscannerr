@@ -18,6 +18,9 @@ export class AppMovieCardComponent implements OnInit, OnChanges {
 
     matchedMovie!: IScannedMovie | undefined;
     isHidden!: boolean | undefined;
+    notExist!: boolean | undefined;
+    foundOnOtherCountry!: boolean | undefined;
+    existStatus!: string;
 
     @HostBinding('attr.class') cssClass: string = "";
     
@@ -43,8 +46,14 @@ export class AppMovieCardComponent implements OnInit, OnChanges {
         if (changes.hasOwnProperty("filterType") || changes.hasOwnProperty("countryFilter"))
         {
             const intersection = this.matchedMovie?.countries?.filter(country => countryFilter.includes(country)) || [];
+            
+            this.notExist = (intersection.length == 0 || this.matchedMovie == null || this.matchedMovie.exist == false);
+            this.foundOnOtherCountry = this.matchedMovie?.exist && intersection.length == 0;
+            this.existStatus = !this.notExist && !this.foundOnOtherCountry ? "Exist" : this.foundOnOtherCountry ? "Found on other Country" : "Not Found";
 
-            this.isHidden = filterType == 'Existing' && (intersection.length > 0 || this.matchedMovie == null || this.matchedMovie.exist == false);
+            this.isHidden = (filterType == 'Existing' && this.notExist) || 
+                (filterType == "ExistOnOtherCountry" && !this.foundOnOtherCountry) ||
+                (filterType == "NotExisting" && (!this.notExist || this.foundOnOtherCountry))
 
             this.cssClass = this.isHidden ? "d-none" : "";
         }

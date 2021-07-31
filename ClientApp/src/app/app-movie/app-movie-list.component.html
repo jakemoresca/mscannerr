@@ -33,6 +33,9 @@
                     <li><a class="dropdown-item" (click)="changeFilterType('NotExisting')"
                         [ngClass]="filterType == 'NotExisting' ? 'active' : ''">Not Existing</a></li>
                     <li>
+                    <li><a class="dropdown-item" (click)="changeFilterType('ExistOnOtherCountry')"
+                            [ngClass]="filterType == 'ExistOnOtherCountry' ? 'active' : ''">Exist on other Country</a></li>
+                    <li>
                         <hr class="dropdown-divider">
                     </li>
                     <li><a class="dropdown-item" (click)="changeFilterType('Unmonitored')"
