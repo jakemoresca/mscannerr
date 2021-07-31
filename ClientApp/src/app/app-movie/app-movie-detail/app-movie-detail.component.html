@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark bg-dark ml-n1">
+<nav class="navbar navbar-dark bg-dark ml-n1" *ngIf="movie">
     <div class="container-fluid justify-content-start">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -43,6 +43,15 @@
                 <p class="card-text">{{ movie.title }} - {{ movie.overview }}</p>
                 <p class="card-text">Released Status: {{ movie.status}}</p>
                 <p class="card-text">Streaming Site Status: {{ existStatus }}</p>
+
+                <ng-container *ngIf="movie && scannedMovie">
+                <div class="card-text" *ngIf="!notExist || foundOnOtherCountry">
+                    <h6>Showing on the Following Countries:</h6>
+                    <ul class="list-group col-md-3">
+                        <li class="list-group-item" *ngFor="let country of scannedMovie.countries">{{country}}</li>
+                    </ul>
+                </div>
+                </ng-container>
             </div>
         </div>
     </div>
