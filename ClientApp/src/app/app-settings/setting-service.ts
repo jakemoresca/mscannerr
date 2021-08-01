@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ISettings } from './settings';
-import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class SettingService
@@ -18,8 +17,8 @@ export class SettingService
         return this.httpClient.post<{ ok: boolean }>("/api/Setting", settings)
     }
 
-    testSettings(settings: ISettings)
+    testMovieSettings(settings: ISettings)
     {
-        return this.httpClient.post<{ ok: boolean }>("/api/Setting/Test", settings)
+        return this.httpClient.post<{ ok: boolean }>("/api/Setting/TestMovieSettings", settings)
     }
 }

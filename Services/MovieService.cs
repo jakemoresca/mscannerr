@@ -36,7 +36,7 @@ namespace mscannerr.Services
 
         public async Task<MovieDto[]> GetMovies()
         {
-            var getMovieUrl = new Uri(GetServiceUrl(_settingsOptions.Value, "/movie"));
+            var getMovieUrl = new Uri(GetServiceUrl(_settingsOptions.Value.MovieSettings, "/movie"));
             var request = new HttpRequestMessage(HttpMethod.Get, getMovieUrl);
 
             var response = await _httpClient.SendAsync(request);
@@ -58,7 +58,7 @@ namespace mscannerr.Services
 
         public async Task<MovieDto> GetMovie(int movieId)
         {
-            var getMovieUrl = new Uri(GetServiceUrl(_settingsOptions.Value, $"/movie/{movieId}"));
+            var getMovieUrl = new Uri(GetServiceUrl(_settingsOptions.Value.MovieSettings, $"/movie/{movieId}"));
             var request = new HttpRequestMessage(HttpMethod.Get, getMovieUrl);
 
             var response = await _httpClient.SendAsync(request);
@@ -117,7 +117,7 @@ namespace mscannerr.Services
             return scannedMovies;
         }
 
-        public async Task<bool> TestSettings(IntegrationSettings settings)
+        public async Task<bool> TestSettings(MovieSettings settings)
         {
             try
             {
@@ -134,7 +134,7 @@ namespace mscannerr.Services
             }
         }
 
-        private string GetServiceUrl(IntegrationSettings integrationSettings, string relativeServiceUrl)
+        private string GetServiceUrl(MovieSettings integrationSettings, string relativeServiceUrl)
         {
             var apiKey = integrationSettings.ApiKey;
             var port = integrationSettings.Port;

@@ -9,7 +9,7 @@
 
 <div class="album py-5 bg-light" *ngIf="settings">
     <div class="container">
-        <h2>Settings</h2>
+        <h2>Movies Settings</h2>
 
         <div class="alert alert-success d-flex align-items-center" role="alert" *ngIf="saveSuccess">
             <i class="bi bi-check2"></i>
@@ -30,7 +30,7 @@
         <h5>General Settings</h5>
         
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="countryFilter" [(ngModel)]="settings.countryFilter">
+            <input type="text" class="form-control" id="countryFilter" [(ngModel)]="settings.movieSettings.countryFilter">
             <label for="countryFilter">Country Filter</label>
         </div>
 
@@ -46,23 +46,23 @@
         </div>
 
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="baseUrl" [(ngModel)]="settings.baseUrl">
+            <input type="text" class="form-control" id="baseUrl" [(ngModel)]="settings.movieSettings.baseUrl">
             <label for="baseUrl">Base Url</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="apiKey" [(ngModel)]="settings.apiKey">
+            <input type="text" class="form-control" id="apiKey" [(ngModel)]="settings.movieSettings.apiKey">
             <label for="apiKey">Api Key</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="host" [(ngModel)]="settings.host">
+            <input type="text" class="form-control" id="host" [(ngModel)]="settings.movieSettings.host">
             <label for="host">Host</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="number" class="form-control" id="port" min="1" maxlength="5" [(ngModel)]="settings.port">
+            <input type="number" class="form-control" id="port" min="1" maxlength="5" [(ngModel)]="settings.movieSettings.port">
             <label for="port">Port</label>
         </div>
         <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" value="" id="useSsl" [(ngModel)]="settings.useSsl">
+            <input class="form-check-input" type="checkbox" value="" id="useSsl" [(ngModel)]="settings.movieSettings.useSsl">
             <label class="form-check-label" for="useSsl">
                 Use SSL
             </label>

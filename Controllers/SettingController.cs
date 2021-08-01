@@ -31,9 +31,9 @@ namespace mscannerr.Controllers
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] IntegrationSettings model)
         {
-            model.BaseUrl = model.BaseUrl.Trim();
+            model.MovieSettings.BaseUrl = model.MovieSettings.BaseUrl.Trim();
 
-            if (!string.IsNullOrWhiteSpace(model.BaseUrl) && !model.BaseUrl.StartsWith("/"))
+            if (!string.IsNullOrWhiteSpace(model.MovieSettings.BaseUrl) && !model.MovieSettings.BaseUrl.StartsWith("/"))
             {
                 return BadRequest(new { Error = "Base urls must start with /" });
             }
@@ -43,10 +43,10 @@ namespace mscannerr.Controllers
             return Ok(new { ok = true });
         }
 
-        [HttpPost("Test")]
+        [HttpPost("TestMovieSettings")]
         public async Task<IActionResult> TestAsync([FromBody] IntegrationSettings model)
         {
-            var result = await _movieService.TestSettings(model);
+            var result = await _movieService.TestSettings(model.MovieSettings);
 
             return Ok(new { ok = result });
         }

@@ -10,7 +10,7 @@ namespace mscannerr.Services
     {
         Task<MovieDto[]> GetMovies();
         Task<MovieDto> GetMovie(int movieId);
-        Task<bool> TestSettings(IntegrationSettings settings);
+        Task<bool> TestSettings(MovieSettings settings);
         Task<ScannedMovie> MatchMovie(MovieDto movie);
         Task<List<ScannedMovie>> MatchMovies();
     }

@@ -8,10 +8,11 @@ import { AppMovieListComponent } from './app-movie/app-movie-list.component';
 import { AppMovieCardComponent } from './app-movie/app-movie-card/app-movie-card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppMovieTableComponent } from './app-movie/app-movie-table-row/app-movie-table.component';
-import { AppSettingsComponent } from './app-settings/app-settings.component';
+import { AppMovieSettingsComponent } from './app-settings/app-movie-settings.component';
 import { FormsModule } from '@angular/forms';
 import { AppMovieTableRowComponent } from './app-movie/app-movie-table-row/app-movie-table-row.component';
 import { AppMovieDetailComponent } from './app-movie/app-movie-detail/app-movie-detail.component';
+import { AppSeriesSettingsComponent } from './app-settings/app-series-settings.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AppMovieDetailComponent } from './app-movie/app-movie-detail/app-movie-
     AppMovieCardComponent,
     AppMovieTableRowComponent,
     AppMovieTableComponent,
-    AppSettingsComponent,
+    AppMovieSettingsComponent,
+    AppSeriesSettingsComponent,
     AppMovieDetailComponent
   ],
   imports: [

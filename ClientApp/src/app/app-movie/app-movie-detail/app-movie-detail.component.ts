@@ -36,11 +36,11 @@ export class AppMovieDetailComponent implements OnInit, OnChanges
         this.scannedMovie = await this.movieService.getMatchedMovie(this.movie.title);
 
         const settings = await this.settingService.getSettings().toPromise()
-        const protocol = settings.useSsl ? "https://" : "http://";
+        const protocol = settings.movieSettings.useSsl ? "https://" : "http://";
 
-        this.baseUrl = `${protocol}${settings.host}:${settings.port}`;
+        this.baseUrl = `${protocol}${settings.movieSettings.host}:${settings.movieSettings.port}`;
         
-        this.countryFilter = settings.countryFilter.split(",");
+        this.countryFilter = settings.movieSettings.countryFilter.split(",");
     }
 
     ngOnChanges() {

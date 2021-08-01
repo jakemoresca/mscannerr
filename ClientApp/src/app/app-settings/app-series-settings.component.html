@@ -1,0 +1,72 @@
+<nav class="navbar navbar-dark bg-dark ml-n1">
+    <div class="container-fluid justify-content-start">
+        <div class="col-md-9">
+            <button type="button" class="btn btn-outline-primary" (click)="saveSettings()">Save</button>
+            <button type="button" class="btn btn-outline-primary" (click)="testSettings()">Test Settings</button>
+        </div>
+    </div>
+</nav>
+
+<div class="album py-5 bg-light" *ngIf="settings">
+    <div class="container">
+        <h2>Series Settings</h2>
+
+        <div class="alert alert-success d-flex align-items-center" role="alert" *ngIf="saveSuccess">
+            <i class="bi bi-check2"></i>
+            <div>
+                Settings was saved succesfully
+            </div>
+        </div>
+        
+        <div class="alert alert-success d-flex align-items-center" role="alert" *ngIf="testSuccess">
+            <i class="bi bi-check2"></i>
+            <div>
+                Connection to Radarr has been established
+            </div>
+        </div>
+
+        <hr>
+        
+        <h5>General Settings</h5>
+        
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="countryFilter" [(ngModel)]="settings.seriesSettings.countryFilter">
+            <label for="countryFilter">Country Filter</label>
+        </div>
+
+        <hr>
+
+        <h5>Sonarr Integration</h5>
+
+        <div class="alert alert-danger d-flex align-items-center" role="alert" *ngIf="testSuccess === false">
+            <i class="bi bi-exclamation-diamond-fill"></i>
+            <div>
+                Cannot connect to Radarr using the settings provided
+            </div>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="baseUrl" [(ngModel)]="settings.seriesSettings.baseUrl">
+            <label for="baseUrl">Base Url</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="apiKey" [(ngModel)]="settings.seriesSettings.apiKey">
+            <label for="apiKey">Api Key</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="host" [(ngModel)]="settings.seriesSettings.host">
+            <label for="host">Host</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="port" min="1" maxlength="5" [(ngModel)]="settings.seriesSettings.port">
+            <label for="port">Port</label>
+        </div>
+        <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" value="" id="useSsl" [(ngModel)]="settings.seriesSettings.useSsl">
+            <label class="form-check-label" for="useSsl">
+                Use SSL
+            </label>
+        </div>
+
+    </div>
+</div>

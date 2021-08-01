@@ -23,10 +23,10 @@ export class AppMovieListComponent implements OnInit
         this.settingService.getSettings().toPromise()
             .then(result => 
             {
-                const protocol = result.useSsl ? "https://" : "http://"
-                this.baseUrl = `${protocol}${result.host}:${result.port}`;
+                const protocol = result.movieSettings.useSsl ? "https://" : "http://"
+                this.baseUrl = `${protocol}${result.movieSettings.host}:${result.movieSettings.port}`;
 
-                this.countryFilter = result.countryFilter.split(",");
+                this.countryFilter = result.movieSettings.countryFilter.split(",");
             });
 
         this.movieService.getMatchedMovies().toPromise()

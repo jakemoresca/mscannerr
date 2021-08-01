@@ -3,11 +3,11 @@ import { SettingService } from './setting-service';
 import { ISettings } from './settings';
 
 @Component({
-    selector: 'app-settings',
-    templateUrl: 'app-settings.component.html'
+    selector: 'app-series-settings',
+    templateUrl: 'app-series-settings.component.html'
 })
 
-export class AppSettingsComponent implements OnInit {
+export class AppSeriesSettingsComponent implements OnInit {
     settings: ISettings | undefined;
     saveSuccess: boolean = false;
     testSuccess?: boolean = undefined;
@@ -35,7 +35,7 @@ export class AppSettingsComponent implements OnInit {
     {
         if (this.settings)
         {
-            this.settingService.testSettings(this.settings).toPromise()
+            this.settingService.testMovieSettings(this.settings).toPromise()
                 .then(result => this.testSuccess = result.ok);
         }
     }
