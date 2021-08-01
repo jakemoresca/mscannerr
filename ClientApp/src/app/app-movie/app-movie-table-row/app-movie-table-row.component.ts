@@ -42,7 +42,7 @@ export class AppMovieTableRowComponent implements OnInit, OnChanges {
         const filterType = changes.hasOwnProperty("filterType") ? changes["filterType"].currentValue as string : this.filterType;
         const countryFilter = changes.hasOwnProperty("countryFilter") ? changes["countryFilter"].currentValue as string[] : this.countryFilter;
 
-        if (changes.hasOwnProperty("filterType") || changes.hasOwnProperty("countryFilter"))
+        if (changes.hasOwnProperty("filterType") || changes.hasOwnProperty("countryFilter") || changes.hasOwnProperty("matchedMovies"))
         {
             const { notExist, foundOnOtherCountry, existStatus, isHidden } = movieAdditionalDetails(this.matchedMovie, countryFilter, filterType);
 

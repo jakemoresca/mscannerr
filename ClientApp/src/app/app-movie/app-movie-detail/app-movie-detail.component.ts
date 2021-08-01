@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SettingService } from 'src/app/app-settings/setting-service';
+import { ISettings } from 'src/app/app-settings/settings';
 import { IMovie, IScannedMovie } from '../movie';
 import { movieAdditionalDetails } from '../movie-helper';
 import { MovieService } from '../movie-service';
@@ -10,11 +11,12 @@ import { MovieService } from '../movie-service';
     templateUrl: 'app-movie-detail.component.html'
 })
 
-export class AppMovieDetailComponent implements OnInit
+export class AppMovieDetailComponent implements OnInit, OnChanges
 {
     movie!: IMovie;
     scannedMovie!: IScannedMovie;
     baseUrl!: string;
+    countryFilter!: string[];
 
     isHidden!: boolean | undefined;
     notExist!: boolean | undefined;
@@ -38,11 +40,18 @@ export class AppMovieDetailComponent implements OnInit
 
         this.baseUrl = `${protocol}${settings.host}:${settings.port}`;
         
-        const countryFilter = settings.countryFilter.split(",");
-        const { notExist, foundOnOtherCountry, existStatus } = movieAdditionalDetails(this.scannedMovie, countryFilter, "");
+        this.countryFilter = settings.countryFilter.split(",");
+    }
+
+    ngOnChanges() {
+        const { notExist, foundOnOtherCountry, existStatus } = movieAdditionalDetails(this.scannedMovie, this.countryFilter, "");
 
         this.notExist = notExist;
         this.foundOnOtherCountry = foundOnOtherCountry;
         this.existStatus = existStatus;
+    }
+
+    async scanMovie() {
+        this.scannedMovie = await this.movieService.matchMovie(this.movie).toPromise();
     }
 }
